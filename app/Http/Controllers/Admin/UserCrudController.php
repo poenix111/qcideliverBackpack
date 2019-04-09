@@ -36,7 +36,10 @@ class UserCrudController extends CrudController
         // TODO: remove setFromDb() and manually define Fields and Columns
         /* $this->crud->setFromDb();
         $this->crud->addField('type','both'); */
-        $this->crud->setColumns('email','email', 'update/create/both'); // a lazy way to add fields: let the CRUD decide what field type it is and set it automatically, along with the field label
+        $rutas = ['email', 'id', 'name', 'tipo', 'estado', 'foto', 'email_verified_at','remember_token', 'Password','created_at','updated_at'];
+        $this->crud->addColumns($rutas, 'update/create/both');
+       
+        
         // add asterisk for fields that are required in UserRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
