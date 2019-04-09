@@ -36,7 +36,7 @@ class UserCrudController extends CrudController
         // TODO: remove setFromDb() and manually define Fields and Columns
         /* $this->crud->setFromDb();
         $this->crud->addField('type','both'); */
-        $rutas = ['email', 'id', 'name', 'tipo', 'estado', 'foto', 'email_verified_at','remember_token', 'Password','created_at','updated_at'];
+        $rutas = ['email', 'id', 'name', 'tipo', 'estado', 'foto', 'email_verified_at','remember_token', 'password','created_at','updated_at'];
         $this->crud->addColumns($rutas, 'update/create/both');
        
         
