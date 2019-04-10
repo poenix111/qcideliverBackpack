@@ -40,6 +40,7 @@ class UserCrudController extends CrudController
         $this->crud->addColumns($rutas, 'update/create/both');
        
         $this->crud->addFields($rutas, 'both');
+        $this->crud->enableExportButtons();
         // add asterisk for fields that are required in UserRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
