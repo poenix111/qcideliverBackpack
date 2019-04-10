@@ -36,28 +36,52 @@ class UserCrudController extends CrudController
         // TODO: remove setFromDb() and manually define Fields and Columns
         /* $this->crud->setFromDb();
         $this->crud->addField('type','both'); */
-        $rutas = [
+        $columnas = [
             ['name' => 'email', 'type' => 'email', 'label' => 'EMAIL'],
             'id',
             'name',
-            'tipo',
-            'estado',
-            ['name' => 'foto' ,'type' => 'image'],
+            [
+                'name'        => 'tipo', // the name of the db column
+                'label'       => 'Tipo', // the input label
+                'type'        => 'radio',
+                'options'     => [ // the key will be stored in the db, the value will be shown as label; 
+                                    0 => "Vendedor",
+                                    1 => "Usuario"
+                                ],
+                // optional
+                //'inline'      => false, // show the radios all on the same line?
+                            ],
+            [
+                'name'        => 'estado', // the name of the db column
+                'label'       => 'Estado', // the input label
+                'type'        => 'radio',
+                'options'     => [ // the key will be stored in the db, the value will be shown as label; 
+                                    0 => "Activo",
+                                    1 => "Inactivo"
+                                ],
+                // optional
+                //'inline'      => false, // show the radios all on the same line?
+                            ],
             ['name' => 'email_verified_at', 'type' => 'date'], 
             'remember_token',
             ['name' => 'password', 'type' => 'password'],
             ['name' => 'created_at', 'type' => 'date'], 
             ['name' => 'updated_at', 'type' => 'date']
         ];
-        $this->crud->addColumns($rutas, 'update/create/both'); //Agregue las columnas al mostrar
-
-        $this->crud->addFields($rutas, 'both');
+         $this->crud->addColumn(['name' => 'foto' ,'type' => 'image']);
+        $this->crud->addColumns($columnas, 'update/create/both'); //Agregue las columnas al mostrar
+       
+        
+       $this->crud->addFields($columnas, 'both');
+       $this->crud->addField(['name' => 'foto' ,'type' => 'text']);
         $this->crud->enableExportButtons();
         $this->crud->enableDetailsRow();
         $this->crud->allowAccess('details_row');
+        
         // add asterisk for fields that are required in UserRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+     
     }
 
     public function store(StoreRequest $request)
@@ -76,5 +100,16 @@ class UserCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
+    }
+
+   public function showDetailsRow($id)
+    {
+        $this->crud->hasAccessOrFail('details_row');
+
+        $this->data['entry'] = $this->crud->getEntry($id);
+        $this->data['crud'] = $this->crud;
+
+        // load the view from /resources/views/vendor/backpack/crud/ if it exists, otherwise load the one in the package
+        return view('crud::details_row', $this->data);
     }
 }

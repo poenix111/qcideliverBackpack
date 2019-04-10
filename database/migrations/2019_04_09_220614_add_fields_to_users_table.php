@@ -15,7 +15,7 @@ class AddFieldsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->integer('tipo')->nullable();
+            $table->int('tipo')->nullable();
             $table->boolean('estado')->nullable();
             $table->string('foto')->nullable();
         });
