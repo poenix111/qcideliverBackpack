@@ -39,7 +39,7 @@ class UserCrudController extends CrudController
         $rutas = ['email', 'id', 'name', 'tipo', 'estado', 'foto', 'email_verified_at','remember_token', 'password','created_at','updated_at'];
         $this->crud->addColumns($rutas, 'update/create/both');
        
-        
+        $this->crud->addFields($rutas, 'both');
         // add asterisk for fields that are required in UserRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');

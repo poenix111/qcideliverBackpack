@@ -18,9 +18,9 @@ class User extends Model
     protected $table = 'users';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
-    // protected $guarded = ['id'];
-    protected $fillable = [];
-    // protected $hidden = [];
+     protected $guarded = ['id'];
+/*     protected $fillable = ['email', 'name', 'password', 'tipo', 'foto','estado'];
+ */    // protected $hidden = [];
     // protected $dates = [];
 
     /*
