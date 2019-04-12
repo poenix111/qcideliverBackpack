@@ -37,8 +37,7 @@ class UserCrudController extends CrudController
         /* $this->crud->setFromDb();
         $this->crud->addField('type','both'); */
         $columnas = [
-            ['name' => 'email', 'type' => 'email', 'label' => 'EMAIL'],
-            'id',
+            ['name' => 'email', 'type' => 'email', 'label' => 'Email'],
             'name',
             [
                 'name'        => 'tipo', // the name of the db column
@@ -62,11 +61,7 @@ class UserCrudController extends CrudController
                 // optional
                 //'inline'      => false, // show the radios all on the same line?
                             ],
-            ['name' => 'email_verified_at', 'type' => 'date'], 
-            'remember_token',
             ['name' => 'password', 'type' => 'password'],
-            ['name' => 'created_at', 'type' => 'date'], 
-            ['name' => 'updated_at', 'type' => 'date']
         ];
          $this->crud->addColumn(['name' => 'foto' ,'type' => 'image']);
         $this->crud->addColumns($columnas, 'update/create/both'); //Agregue las columnas al mostrar
